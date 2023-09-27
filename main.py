@@ -12,6 +12,7 @@ colorWhite = "white"
 colorRed = "red"
 colorNavy = "navy"
 starXoffset = 10
+starYLocation = ((mainSize/2)-(mainSize*0.063))
 
 #changing the turtle speed
 flagPointer.speed(0)
@@ -104,7 +105,7 @@ def colored_star():
 
 
 for i in range(6):
-    flagPointer.goto(0-(flagLength/2)+(mainSize*0.063), (mainSize/2)-(mainSize*0.063))
+    flagPointer.goto(0-(flagLength/2)+(mainSize*0.063), starYLocation)
     colored_star()
 
 
