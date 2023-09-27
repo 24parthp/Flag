@@ -3,25 +3,25 @@ import turtle
 window = turtle.Screen()
 window.screensize(canvwidth=1000, canvheight=1000, bg="lightblue")
 
-
 #var size holds the value that is used to size everything
 mainSize = 200
 flagLength = mainSize*1.9
 stripHeight = mainSize*(1/13)
+
+#colors
 colorWhite = "white"
 colorRed = "red"
 colorNavy = "navy"
-starXoffset = 10
-starYLocation = ((mainSize/2)-(mainSize*0.063))
+
+#the pointer 
+flagPointer = turtle.Turtle()
 
 #changing the turtle speed
 flagPointer.speed(0)
 
-
 #drawing  the flag border
 def flagBorder():
     #centering the pointer
-    flagPointer = turtle.Turtle()
     flagPointer.penup()
     flagPointer.goto(0-(flagLength)/2,mainSize/2)
 
@@ -32,10 +32,9 @@ def flagBorder():
         flagPointer.right(90)
         flagPointer.forward(mainSize)
         flagPointer.right(90)
-
-
 #drawing the strips
 def flagStrips():
+    yLocation = mainSize/2
     flagPointer.penup()
     for i in range(13):
         flagPointer.goto(0-(flagLength/2),yLocation-8)
@@ -50,8 +49,6 @@ def flagStrips():
         flagPointer.penup()
         flagPointer.backward(flagLength)
         yLocation = yLocation - stripHeight
-
-
 #making a rectangle
 def flagStarContainer():
     #positioning the pointer
@@ -68,17 +65,20 @@ def flagStarContainer():
         flagPointer.forward(sqrWidth)
         flagPointer.right(90)
     flagPointer.end_fill()
-
-
 #Making stars
-def colored_star():
+def colored_star(x,y):
+    #star location info
+    starYoffset = mainSize*0.054
+    starXLocation = (0-(flagLength/2)+(mainSize*0.063))
+    starYLocation = ((mainSize/2))
+
     #positioing the pointer
     flagPointer.fillcolor(colorWhite)
     flagPointer.begin_fill()
-    flagPointer.goto(0-(flagLength/2)+(mainSize*0.063), (mainSize/2)-(mainSize*0.063))
+    flagPointer.goto(starXLocation+x, starYLocation-starYoffset+y)
      
     # size of star
-    size = mainSize*(0.0616/2)
+    size = mainSize*(0.0616/4)
      
     # object color
     flagPointer.color(colorWhite)
@@ -103,10 +103,18 @@ def colored_star():
     # fill color
     flagPointer.end_fill()
 
+#function that holds calls other functions
+def flag():
+    flagBorder()
+    flagStrips()
+    flagStarContainer()
+    for i in range(6):
+        for k in range(5):
+            rem = k % 2
+            if(rem == 0):
+                colored_star(i*(mainSize*0.063*2)+(mainSize*0.063)+(mainSize*(0.063/2)),k*mainSize*0.054*-1)
+            colored_star(i*(mainSize*0.063*2),k*mainSize*0.054*-1)
 
-for i in range(6):
-    flagPointer.goto(0-(flagLength/2)+(mainSize*0.063), starYLocation)
-    colored_star()
-
+flag()
 
 window.exitonclick()
