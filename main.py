@@ -12,6 +12,7 @@ stripHeight = mainSize*(1/13)
 colorWhite = "white"
 colorRed = "red"
 colorNavy = "navy"
+colorLightBlue = 'lightblue'
 
 #the pointer 
 flagPointer = turtle.Turtle()
@@ -24,6 +25,9 @@ def flagBorder():
     #centering the pointer
     flagPointer.penup()
     flagPointer.goto(0-(flagLength)/2,mainSize/2)
+    flagPointer.left(90)
+    flagPointer.pensize(mainSize*0.025)
+    flagPointer.color('black')
 
     #drawing the border
     flagPointer.pendown()
@@ -37,7 +41,7 @@ def flagStrips():
     yLocation = mainSize/2
     flagPointer.penup()
     for i in range(13):
-        flagPointer.goto(0-(flagLength/2),yLocation-8)
+        flagPointer.goto(0-(flagLength/2),yLocation-(mainSize*0.04))
         flagPointer.pendown()
         rem = i % 2
         if(rem == 0):
@@ -52,7 +56,7 @@ def flagStrips():
 #making a rectangle
 def flagStarContainer():
     #positioning the pointer
-    flagPointer.goto(0-(flagLength)/2,mainSize/2)
+    flagPointer.goto(0-(flagLength)/2,mainSize/2-(mainSize*0.002))
     flagPointer.fillcolor(colorNavy)
     flagPointer.begin_fill()
 
@@ -68,7 +72,7 @@ def flagStarContainer():
 #Making stars
 def colored_star(x,y):
     #star location info
-    starYoffset = mainSize*0.054
+    starYoffset = mainSize*0.054/1.25
     starXLocation = (0-(flagLength/2)+(mainSize*0.063))
     starYLocation = ((mainSize/2))
 
@@ -102,19 +106,39 @@ def colored_star(x,y):
          
     # fill color
     flagPointer.end_fill()
+    flagPointer.penup()
+#cleaning things up
+def cleaning():
+    flagPointer.goto(0-(flagLength)/2-(mainSize*.02), mainSize/2+(mainSize*0.05))
+    flagPointer.pendown()
+    flagPointer.right(90)
+
+    flagPointer.color(colorLightBlue)
+    flagPointer.pensize(mainSize*0.05)
+    flagPointer.forward(mainSize*1.20)
+
+    flagPointer.penup()
+    flagPointer.color(colorLightBlue)
+    flagPointer.goto(flagLength/2+(mainSize*.02), mainSize/2+(mainSize*0.05))
+    flagPointer.pendown()
+    flagPointer.forward(mainSize*1.20)
+
 
 #function that holds calls other functions
 def flag():
-    flagBorder()
     flagStrips()
     flagStarContainer()
-    for i in range(6):
+    for i in range(11):
         for k in range(5):
-            rem = k % 2
-            if(rem == 0):
-                colored_star(i*(mainSize*0.063*2)+(mainSize*0.063)+(mainSize*(0.063/2)),k*mainSize*0.054*-1)
-            colored_star(i*(mainSize*0.063*2),k*mainSize*0.054*-1)
-
+            rem = i % 2
+            if rem != 0:
+                if k == 4:
+                    k = 3
+                k = k+1/2
+                colored_star(i*(mainSize*0.063),k*mainSize*0.054*-1*2)
+            colored_star(i*(mainSize*0.063),k*mainSize*0.054*-1*2)
+    cleaning()
+    flagBorder()
 flag()
 
 window.exitonclick()
