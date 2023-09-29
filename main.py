@@ -125,13 +125,20 @@ def cleaning():
     flagPointer.forward(mainSize*1.20)
 #Erasing the previous flag
 def eraseFlag():
+    eraseSize = mainSize/4+(mainSize*0.05)
+    pointerYoffset = eraseSize/2-(mainSize*0.015)
     #reset the point to top left of flag
     flagPointer.penup()
-    flagPointer.goto(0-(flagLength)/2,mainSize/2)
+    flagPointer.goto(0-(flagLength)/2,mainSize/2-pointerYoffset)
 
     #painter over the flag
-    flagPointer.color(backgroundColor)
-    flagPointer.forward(flagLength)
+    flagPointer.pendown()
+    flagPointer.color("white")
+    flagPointer.pensize(eraseSize)
+    for i in range(4):
+        flagPointer.goto(0-(flagLength)/2,mainSize/2-pointerYoffset)
+        flagPointer.forward(flagLength)
+        pointerYoffset = pointerYoffset + eraseSize
 
 #function that holds calls other functions
 def flag():
