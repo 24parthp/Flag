@@ -9,10 +9,10 @@ flagLength = mainSize*1.9
 stripHeight = mainSize*(1/13)
 
 #colors
-colorWhite = "white"
-colorRed = "red"
-colorNavy = "navy"
-colorLightBlue = 'lightblue'
+USflagWhite = "#FFFFFF"
+USflagRed = "#B31942"
+backgroundColor = "lightblue"
+USflagBlue = '#0A3161'
 
 #the pointer 
 flagPointer = turtle.Turtle()
@@ -45,9 +45,9 @@ def flagStrips():
         flagPointer.pendown()
         rem = i % 2
         if(rem == 0):
-            flagPointer.color(colorRed)
+            flagPointer.pencolor(USflagRed)
         else:
-            flagPointer.color(colorWhite)
+            flagPointer.pencolor(USflagWhite)
         flagPointer.pensize(stripHeight)
         flagPointer.forward(flagLength)
         flagPointer.penup()
@@ -57,10 +57,11 @@ def flagStrips():
 def flagStarContainer():
     #positioning the pointer
     flagPointer.goto(0-(flagLength)/2,mainSize/2-(mainSize*0.002))
-    flagPointer.fillcolor(colorNavy)
+    flagPointer.fillcolor(backgroundColor)
     flagPointer.begin_fill()
 
     #drawing the rectangle
+    flagPointer.color(USflagBlue)
     for i in range(2):
         sqrLength = mainSize*0.76
         sqrWidth = mainSize*(7/13)
@@ -77,7 +78,7 @@ def colored_star(x,y):
     starYLocation = ((mainSize/2))
 
     #positioing the pointer
-    flagPointer.fillcolor(colorWhite)
+    flagPointer.fillcolor(USflagWhite)
     flagPointer.begin_fill()
     flagPointer.goto(starXLocation+x, starYLocation-starYoffset+y)
      
@@ -85,7 +86,7 @@ def colored_star(x,y):
     size = mainSize*(0.0616/4)
      
     # object color
-    flagPointer.color(colorWhite)
+    flagPointer.pencolor(USflagWhite)
      
     # object width
     flagPointer.width(4)
@@ -94,7 +95,7 @@ def colored_star(x,y):
     angle = 144
      
     # color to fill
-    flagPointer.fillcolor(colorWhite)
+    flagPointer.fillcolor(USflagWhite)
     flagPointer.begin_fill()
      
     # form star
@@ -113,16 +114,24 @@ def cleaning():
     flagPointer.pendown()
     flagPointer.right(90)
 
-    flagPointer.color(colorLightBlue)
+    flagPointer.pencolor(backgroundColor)
     flagPointer.pensize(mainSize*0.05)
     flagPointer.forward(mainSize*1.20)
 
     flagPointer.penup()
-    flagPointer.color(colorLightBlue)
+    flagPointer.pencolor(backgroundColor)
     flagPointer.goto(flagLength/2+(mainSize*.02), mainSize/2+(mainSize*0.05))
     flagPointer.pendown()
     flagPointer.forward(mainSize*1.20)
+#Erasing the previous flag
+def eraseFlag():
+    #reset the point to top left of flag
+    flagPointer.penup()
+    flagPointer.goto(0-(flagLength)/2,mainSize/2)
 
+    #painter over the flag
+    flagPointer.color(backgroundColor)
+    flagPointer.forward(flagLength)
 
 #function that holds calls other functions
 def flag():
@@ -139,6 +148,7 @@ def flag():
             colored_star(i*(mainSize*0.063),k*mainSize*0.054*-1*2)
     cleaning()
     flagBorder()
+    eraseFlag()
 flag()
 
 window.exitonclick()
