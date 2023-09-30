@@ -383,13 +383,292 @@ def jamaicaFlag():
         flagPointer.pendown()
         flagPointer.seth(math.degrees(math.atan(mainSize/flagLength)))
         flagPointer.fd(math.sqrt(mainSize**2+flagLength**2)*-1)
-
+        flagPointer.penup()
     #calling the functions
     jamaicaBackground()
     jamaicaBlackTri()
     jamaicaYellowStrips()
     afterFlag()
+#Draws the Ghana flag
+def ghanaFlag():
+    def ghanaFlagStripes():
+        Yoffset = mainSize/3/2
 
+        flagPointer.penup()
+        flagPointer.goto(0-(flagLength)/2,mainSize/2-Yoffset)
+        flagPointer.pensize(mainSize/3)
+        flagPointer.seth(0)
+
+        for i in range(3):
+            flagPointer.pendown()
+            if i == 0:
+                flagPointer.color('#CF0921')
+            elif i == 1:
+                flagPointer.color("#FCD20F")
+            elif i == 2:
+                flagPointer.color("#006B3D")
+            flagPointer.fd(flagLength)
+            flagPointer.penup()
+            Yoffset = Yoffset + mainSize/3
+            flagPointer.goto(0-(flagLength)/2,mainSize/2-Yoffset)
+
+    def ghanaFlagStar():
+        ghanaFlagBlack = 'black'
+        starXLocation = flagLength*0.02
+        starYLocation = mainSize*0.04
+
+        #positioning the pointer
+        flagPointer.penup()
+        flagPointer.fillcolor(ghanaFlagBlack)
+        flagPointer.begin_fill()
+        flagPointer.goto(starXLocation, starYLocation)
+        
+        # size of star
+        size = mainSize*(1/3/2.55)
+        
+        # object color
+        flagPointer.pencolor(ghanaFlagBlack)
+        
+        # object width
+        flagPointer.width(4)
+        
+        # angle to form star
+        angle = 144
+        
+        # color to fill
+        flagPointer.fillcolor(ghanaFlagBlack)
+        flagPointer.begin_fill()
+        flagPointer.pendown()
+        
+        # form star
+        for side in range(5):
+            flagPointer.forward(size)
+            flagPointer.right(angle)
+            flagPointer.forward(size)
+            flagPointer.right(72 - angle)
+            
+        # fill color
+        flagPointer.end_fill()
+        flagPointer.penup()
+
+    ghanaFlagStripes()
+    ghanaFlagStar()
+    afterFlag()
+#Draws the Tanzania flag
+def tanzaniaFlag():
+    #Green and blue background
+    def tanzaniaFlagBlueGreen():
+        flagPointer.penup()
+        flagPointer.goto(0-(flagLength)/2,mainSize/2)
+        flagPointer.pencolor('#1EB53A')
+
+        #Green
+        flagPointer.seth(0)
+        flagPointer.pendown()
+        flagPointer.fillcolor("#1EB53A")
+        flagPointer.begin_fill()
+        flagPointer.fd(flagLength)
+        flagPointer.seth(math.degrees(math.atan(mainSize/flagLength)))
+        flagPointer.fd(math.sqrt(mainSize**2+flagLength**2)*-1)
+        flagPointer.seth(90)
+        flagPointer.fd(mainSize)
+        flagPointer.end_fill()
+        flagPointer.penup()
+
+        flagPointer.goto(0-(flagLength)/2*-1,mainSize/2)
+
+        #Blue
+        flagPointer.seth(270)
+        flagPointer.pendown()
+        flagPointer.pencolor('#00A3DD')
+        flagPointer.fillcolor("#00A3DD")
+        flagPointer.begin_fill()
+        flagPointer.fd(mainSize)
+        flagPointer.right(90)
+        flagPointer.fd(flagLength)
+        flagPointer.seth(math.degrees(math.atan(mainSize/flagLength)))
+        flagPointer.fd(math.sqrt(mainSize**2+flagLength**2))
+        flagPointer.end_fill()
+        flagPointer.penup()
+    #Yellow and black stripe
+
+    def tanzaniaFlagBlackYellow():
+        flagPointer.penup()
+        flagPointer.goto(0+flagLength/2,mainSize/2)
+        flagPointer.seth(math.degrees(math.atan(mainSize/flagLength)))
+        flagPointer.pencolor('#FCD116')
+        flagPointer.pensize(mainSize*0.395833)
+
+        flagPointer.pendown()
+        flagPointer.fd(math.sqrt(mainSize**2+flagLength**2)*-1)
+
+        flagPointer.pencolor('black')
+        flagPointer.pensize(mainSize*0.2708333)
+        flagPointer.fd(math.sqrt(mainSize**2+flagLength**2))
+
+    tanzaniaFlagBlueGreen()
+    tanzaniaFlagBlackYellow()
+    afterFlag()
+#draws the cuba flag
+def cubaFlag():
+    #cuba stripes
+    def cubaFlagStripes():
+        Yoffset = mainSize/5/2
+
+        flagPointer.penup()
+        flagPointer.goto(0-flagLength/2,mainSize/2-Yoffset)
+
+        flagPointer.pensize(mainSize/5)
+
+        for i in range(5):
+            if i % 2 == 0:
+                flagPointer.pencolor('#002590')
+            else:
+                flagPointer.pencolor('#FFFFFF')
+            flagPointer.pendown()
+            flagPointer.fd(flagLength*1.01)
+            flagPointer.penup()
+
+            Yoffset = Yoffset + mainSize/5
+
+            flagPointer.goto(0-flagLength/2,mainSize/2-Yoffset)
+    #Triangle
+    def cubaFlagTri():
+        flagPointer.goto(0-flagLength/2, mainSize/2+mainSize*(-0.025))
+        flagPointer.seth(90)
+
+        flagPointer.fillcolor("#CC0D0D")
+        flagPointer.begin_fill()
+        for i in range(3):
+            flagPointer.right(120)
+            flagPointer.fd(flagLength/2)
+        flagPointer.end_fill()
+    #star
+    def cubaFlagStar():
+        cubaFlagWhite = 'white'
+        flagPointer.penup()
+        starXLocation = 0-flagLength/3
+        starYLocation = 0+mainSize/15
+
+        #positioning the pointer
+        flagPointer.penup()
+        flagPointer.fillcolor(cubaFlagWhite)
+        flagPointer.begin_fill()
+        flagPointer.goto(starXLocation, starYLocation)
+        flagPointer.seth(0)
+        
+        # size of star
+        size = mainSize*(1/3/2.4)
+        
+        # object color
+        flagPointer.pencolor(cubaFlagWhite)
+        
+        # object width
+        flagPointer.width(4)
+        
+        # angle to form star
+        angle = 144
+        
+        # color to fill
+        flagPointer.fillcolor(cubaFlagWhite)
+        flagPointer.begin_fill()
+        flagPointer.pendown()
+        
+        # form star
+        for side in range(5):
+            flagPointer.forward(size)
+            flagPointer.right(angle)
+            flagPointer.forward(size)
+            flagPointer.right(72 - angle)
+            
+        # fill color
+        flagPointer.end_fill()
+        flagPointer.penup()
+
+
+    cubaFlagStripes()
+    cubaFlagTri()
+    cubaFlagStar()
+    afterFlag()
+#draws the Turkey flag
+def turkeyFlag():
+    #red background
+    def turkeyFlagBackground():
+        flagPointer.penup()
+        flagPointer.seth(0)
+        flagPointer.goto(0-flagLength/2, mainSize/2)
+        flagPointer.pencolor('#E30A17')
+        flagPointer.fillcolor('#E30A17')
+    
+        flagPointer.begin_fill()
+        flagPointer.pendown()
+        for i in range(2):
+            flagPointer.fd(flagLength)
+            flagPointer.right(90)
+            flagPointer.fd(mainSize)
+            flagPointer.right(90)
+        flagPointer.end_fill()
+    #white moon
+    def turkeyFlagMoon():
+        flagPointer.penup()
+        flagPointer.goto(0-flagLength/2+mainSize/2, -mainSize/4)
+        flagPointer.fillcolor('white')
+        flagPointer.begin_fill()
+        flagPointer.circle(mainSize/4)
+        flagPointer.end_fill()
+
+        flagPointer.goto(0-flagLength/2+mainSize/2+mainSize/16, 0-(2/5/2)*mainSize)
+        flagPointer.fillcolor('#E30A17')
+        flagPointer.begin_fill()
+        flagPointer.circle((2/5)/2*mainSize)
+        flagPointer.end_fill()
+    #white star
+    def turkeyFlagStar():
+        turkeyFlagWhite = 'white'
+        flagPointer.penup()
+        starXLocation = 0-flagLength/12
+        starYLocation = 0
+
+        #positioning the pointer
+        flagPointer.penup()
+        flagPointer.fillcolor(turkeyFlagWhite)
+        flagPointer.begin_fill()
+        flagPointer.goto(starXLocation, starYLocation)
+        flagPointer.seth(90)
+        
+        # size of star
+        size = mainSize*(1/3/4)
+        
+        # object color
+        flagPointer.pencolor(turkeyFlagWhite)
+        
+        # object width
+        flagPointer.width(4)
+        
+        # angle to form star
+        angle = 144
+        
+        # color to fill
+        flagPointer.fillcolor(turkeyFlagWhite)
+        flagPointer.begin_fill()
+        flagPointer.pendown()
+        
+        # form star
+        for side in range(5):
+            flagPointer.forward(size)
+            flagPointer.right(angle)
+            flagPointer.forward(size)
+            flagPointer.right(72 - angle)
+            
+        # fill color
+        flagPointer.end_fill()
+        flagPointer.penup()
+
+
+    turkeyFlagBackground()
+    turkeyFlagMoon()
+    turkeyFlagStar()
+    afterFlag()
 
 #Draws every flag
 def flag():
@@ -399,6 +678,10 @@ def flag():
     columbiaFlag()
     iceLandFlag()
     jamaicaFlag()
+    ghanaFlag()
+    tanzaniaFlag()
+    cubaFlag()
+    turkeyFlag()
 
 flag()
 
